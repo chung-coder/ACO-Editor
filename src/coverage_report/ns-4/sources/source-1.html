@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EngineMemento</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.aco.editor.memento</a>
+</div>
+
+<h1>Coverage Summary for Class: EngineMemento (fr.istic.aco.editor.memento)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EngineMemento</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package fr.istic.aco.editor.memento;
+&nbsp;
+&nbsp;public class EngineMemento implements Memento {
+<b class="fc">&nbsp;    String bufferContent = &quot;&quot;;</b>
+<b class="fc">&nbsp;    int beginIndex = 0;</b>
+<b class="fc">&nbsp;    int endIndex = 0;</b>
+<b class="fc">&nbsp;    String clipboard = &quot;&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;    public EngineMemento(String bufferContent, int beginIndex, int endIndex, String clipboard) {</b>
+<b class="fc">&nbsp;        setBufferContent(bufferContent);</b>
+<b class="fc">&nbsp;        setBeginIndex(beginIndex);</b>
+<b class="fc">&nbsp;        setEndIndex(endIndex);</b>
+<b class="fc">&nbsp;        setClipboard(clipboard);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getBufferContent() {
+<b class="fc">&nbsp;        return bufferContent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBufferContent(String bufferContent) {
+<b class="fc">&nbsp;        this.bufferContent = bufferContent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getBeginIndex() {
+<b class="fc">&nbsp;        return beginIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBeginIndex(int beginIndex) {
+<b class="fc">&nbsp;        this.beginIndex = beginIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getEndIndex() {
+<b class="fc">&nbsp;        return endIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEndIndex(int endIndex) {
+<b class="fc">&nbsp;        this.endIndex = endIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getClipboard() {
+<b class="fc">&nbsp;        return clipboard;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setClipboard(String clipboard) {
+<b class="fc">&nbsp;        this.clipboard = clipboard;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-23 09:20</div>
+</div>
+</body>
+</html>

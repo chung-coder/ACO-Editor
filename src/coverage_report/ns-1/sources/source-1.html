@@ -1,0 +1,239 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserInterface</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.istic.aco.editor</a>
+</div>
+
+<h1>Coverage Summary for Class: UserInterface (fr.istic.aco.editor)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserInterface</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/77)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package fr.istic.aco.editor;
+&nbsp;import fr.istic.aco.editor.commands.*;
+&nbsp;import fr.istic.aco.editor.core.*;
+&nbsp;
+&nbsp;import java.util.Scanner;
+&nbsp;
+<b class="nc">&nbsp;public class UserInterface {</b>
+&nbsp;    public static void main(String[] args) {
+&nbsp;        // Engine and Invoker setup
+<b class="nc">&nbsp;        Engine engine = new EngineImpl();</b>
+<b class="nc">&nbsp;        Invoker invoker = new Invoker(engine);</b>
+<b class="nc">&nbsp;        Recorder recorder = new Recorder();</b>
+<b class="nc">&nbsp;        UndoManager undoManager = new UndoManager(engine);</b>
+&nbsp;
+<b class="nc">&nbsp;        invoker.addCommand(&quot;i&quot;, new InsertTextCommand(engine, invoker, recorder, undoManager));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;v&quot;, new PasteTextCommand(engine, recorder, undoManager));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;x&quot;, new CutSelectedCommand(engine, recorder, undoManager));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;d&quot;, new DeleteTextCommand(engine, recorder, undoManager));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;m&quot;, new MoveSelection(engine, invoker, recorder, undoManager));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;c&quot;, new CopyTextCommand(engine, recorder, undoManager));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;s&quot;, new StartCommand(recorder));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;e&quot;, new StopCommand(recorder));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;r&quot;, new ReplayCommand(recorder));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;1&quot;, new UndoCommand(undoManager));</b>
+<b class="nc">&nbsp;        invoker.addCommand(&quot;2&quot;, new RedoCommand(undoManager));</b>
+&nbsp;
+&nbsp;        // Command-line interface
+<b class="nc">&nbsp;        Scanner scanner = new Scanner(System.in);</b>
+&nbsp;        String command;
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Welcome to the Java Mini Editor!&quot;);</b>
+<b class="nc">&nbsp;        printHelp();</b>
+&nbsp;
+&nbsp;        while (true) {
+<b class="nc">&nbsp;            System.out.print(&quot;&gt; &quot;);</b>
+<b class="nc">&nbsp;            command = scanner.nextLine().toLowerCase();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (command.equals(&quot;i&quot;)) {</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Enter insert text: &quot;);</b>
+<b class="nc">&nbsp;                String inputText = scanner.nextLine();</b>
+<b class="nc">&nbsp;                if(inputText == null || inputText.trim().isEmpty()){</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;Invalid input. No text entered. Please provide input.&quot;);</b>
+&nbsp;                    continue;
+&nbsp;                } else {
+<b class="nc">&nbsp;                    invoker.setText(inputText);</b>
+<b class="nc">&nbsp;                    invoker.playCommand(command);</b>
+<b class="nc">&nbsp;                    displayState(engine, &quot;Text inserted successfully!&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;            } else if (command.equals(&quot;m&quot;)) {</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Enter start index and end index: [start] [end] (e.g., 0 3):&quot;);</b>
+<b class="nc">&nbsp;                String indicesInput = scanner.nextLine();</b>
+<b class="nc">&nbsp;                String[] indices = indicesInput.split(&quot; &quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                if (indices.length != 2) {</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;Invalid input. Please enter two indices separated by a space.&quot;);</b>
+&nbsp;                    continue;
+&nbsp;                }
+&nbsp;
+&nbsp;                try {
+<b class="nc">&nbsp;                    int newBeginIndex = Integer.parseInt(indices[0]);</b>
+<b class="nc">&nbsp;                    int newEndIndex = Integer.parseInt(indices[1]);</b>
+&nbsp;
+<b class="nc">&nbsp;                    if (newBeginIndex &lt; 0 || newEndIndex &gt; engine.getBufferContents().length() || newBeginIndex &gt; newEndIndex) {</b>
+<b class="nc">&nbsp;                        System.out.println(&quot;Invalid indices. Ensure they are within range and start &lt;= end.&quot;);</b>
+&nbsp;                        continue;
+&nbsp;                    }
+<b class="nc">&nbsp;                    invoker.setBeginIndex(newBeginIndex);</b>
+<b class="nc">&nbsp;                    invoker.setEndIndex(newEndIndex);</b>
+<b class="nc">&nbsp;                    invoker.playCommand(&quot;m&quot;);</b>
+<b class="nc">&nbsp;                    displayState(engine, &quot;Selection moved successfully!&quot;);</b>
+<b class="nc">&nbsp;                } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;Invalid input. Please enter numeric indices.&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } else if (command.equals(&quot;h&quot;)) {</b>
+<b class="nc">&nbsp;                printHelp();</b>
+<b class="nc">&nbsp;            } else if (command.equals(&quot;q&quot;)) {</b>
+<b class="nc">&nbsp;                System.out.println(&quot;Are you sure you want to exit? (y/n)&quot;);</b>
+<b class="nc">&nbsp;                String exitConfirmation = scanner.nextLine().toLowerCase();</b>
+<b class="nc">&nbsp;                if (exitConfirmation.equals(&quot;y&quot;)) {</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;Goodbye!&quot;);</b>
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                try {
+<b class="nc">&nbsp;                    invoker.playCommand(command);</b>
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    System.out.println(e.getMessage());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                if(invoker.getCommands().containsKey(command)){</b>
+<b class="nc">&nbsp;                    displayState(engine, &quot;&quot;);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void printHelp() {
+<b class="nc">&nbsp;        System.out.println(&quot;i: Insert text&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;d: Delete selected text&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;c: Copy selected text&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;x: Cut selected text&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;p: Paste clipboard content&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;m: Move selection (e.g., specify indices)&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;s: Recording Start&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;e: Recording End&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;r: Replaying&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;1: Undo&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;2: Redo&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;h: Display this help menu&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;q: Quit the editor&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void displayState(Engine engine, String message) {
+<b class="nc">&nbsp;        System.out.println(message);</b>
+<b class="nc">&nbsp;        System.out.println(&quot;------------------------------&quot;);</b>
+<b class="nc">&nbsp;        if(message.equals(&quot;Selection moved successfully!&quot;)){</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Selected Text: &quot; + engine.getBufferContents().substring(engine.getSelection().getBeginIndex(), engine.getSelection().getEndIndex()));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        System.out.println(&quot;Current Buffer Contents: &quot; + engine.getBufferContents());</b>
+<b class="nc">&nbsp;        System.out.println(&quot;Current Clipboard Contents: &quot; + engine.getClipboardContents());</b>
+<b class="nc">&nbsp;        System.out.println(&quot;------------------------------&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-23 09:20</div>
+</div>
+</body>
+</html>

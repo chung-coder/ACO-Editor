@@ -2,7 +2,9 @@
 This project was completed by Ting-Chen Yen and DIAGNE Mame Absa as part of the course 2024 Object-Oriented Analysis and Design (ACO) in the M1 Informatique CNI program at the University of Rennes ISTIC under the supervision of Adrian Le Roch.
 
 ## Overview
-We have provided the list of the editor's features, supported commands. You can access the full API documentation through the [JavaDoc](https://chung-coder.github.io/ACO-Editor/).
+We have provided the list of the editor's features, supported commands. 
+For a comprehensive guide, please refer to [full API documentation](https://chung-coder.github.io/ACO-Editor/).
+You can also explore [UML diagram](https://github.com/chung-coder/ACO-Editor/blob/main/UML.pdf) for an architectural overview.
 
 PDF prints of the documentation can be found [here](https://github.com/chung-coder/ACO-Editor/blob/main/ACO%20REPORT.pdf).
 ## Features
@@ -16,6 +18,7 @@ PDF prints of the documentation can be found [here](https://github.com/chung-cod
     - Over 50 Unit tests for all the features of the editor using JUnit 5.
     - Exception handling is tested for all the features of the editor.
     - Coverage Report Summary
+
 
   | Package                     | Class (%)   | Method (%)   | Branch (%)   | Line (%)   |
   	|-----------------------------|-------------|--------------|--------------|------------|
